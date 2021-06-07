@@ -73,10 +73,12 @@ public class RegisterActivity extends AppCompatActivity {
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
 
+            //ALEX
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
+
                         mLoadingBar.dismiss();
                         Toast.makeText(RegisterActivity.this, "Registration is successfull", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this,SetupActivity.class);

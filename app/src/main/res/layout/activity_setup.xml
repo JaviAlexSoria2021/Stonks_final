@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
 
             <Button
-                android:id="@+id/btnSave"
+                android:id="@+id/btnSaveUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Save"

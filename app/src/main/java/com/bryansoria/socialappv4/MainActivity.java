@@ -388,15 +388,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.profile:
                 startActivity(new Intent(MainActivity.this,ProfileActivity.class));
                 break;
-            case R.id.friend:
+            /*case R.id.friend:
                 startActivity(new Intent(MainActivity.this,FriendActivity.class));
+                break;*/
+            case R.id.listedUsers:
+                startActivity(new Intent(MainActivity.this, ListedUsersActivity.class));
                 break;
-            case R.id.findFriend:
-                startActivity(new Intent(MainActivity.this,FindFriendActivity.class));
-                break;
-            case R.id.chat:
+            /*case R.id.chat:
                 startActivity(new Intent(MainActivity.this,ChatUsersActivity.class));
-                break;
+                break;*/
             case R.id.logout: //Aqui agregare la funcion de cerrar sesion
                 mAuth.signOut();
                 Intent intent = new Intent(MainActivity.this,LoginActivity.class);

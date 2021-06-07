@@ -62,7 +62,7 @@ public class ChatActivity extends AppCompatActivity {
     FirebaseRecyclerOptions<Chat>options;
     FirebaseRecyclerAdapter<Chat,ChatMyViewHolder>adapter;
     String myProfileImageLink;
-    String URL = "https://fcm.googleapis.com/fcm/send";//usaremos un objeto jason para enviar la notificacion
+    String URL = "https://fcm.googleapis.com/fcm/send";//usaremos un objeto json para enviar la notificacion
     RequestQueue requestQueue;
     String username;
 
@@ -167,7 +167,7 @@ public class ChatActivity extends AppCompatActivity {
     private void SendSMS() {
         String sms = inputSms.getText().toString();
         if (sms.isEmpty()){
-            Toast.makeText(this, "Please write something", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Por favor introduzca algo de texto", Toast.LENGTH_SHORT).show();
         } else {
             HashMap hashMap = new HashMap();
             hashMap.put("sms",sms);
@@ -181,7 +181,7 @@ public class ChatActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task task) {
                                 if (task.isSuccessful()){
-                                    sendNotification(sms);
+                                    //sendNotification(sms);
                                     inputSms.setText(null);
                                     Toast.makeText(ChatActivity.this, "SMS sent", Toast.LENGTH_SHORT).show();
                                 }
@@ -197,6 +197,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     //QUITAR SI NO ENTIENDO LA EXPLICACION 42
+    /*
     private void sendNotification(String sms) {
         JSONObject jsonObject = new JSONObject();
         try {
@@ -238,7 +239,7 @@ public class ChatActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void LoadOtherUser() {
         mUserRef.child(OtherUserID).addValueEventListener(new ValueEventListener() {

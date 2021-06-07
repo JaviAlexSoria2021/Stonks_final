@@ -10,11 +10,11 @@ import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class FindFriendViewHolder extends RecyclerView.ViewHolder {
+public class ListedUsersViewHolder extends RecyclerView.ViewHolder {
 
     CircleImageView profileImage;
     TextView username,profession;
-    public FindFriendViewHolder(@NonNull View itemView) {
+    public ListedUsersViewHolder(@NonNull View itemView) {
         super(itemView);
         profileImage = itemView.findViewById(R.id.profileImage);
         username = itemView.findViewById(R.id.username);

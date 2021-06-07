@@ -30,12 +30,12 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class SetupActivity extends AppCompatActivity {
+public class UpdateActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 101;
     CircleImageView profileImageView;
     EditText inputUsername,inputCity,inputCountry,inputProfession;
-    Button btnSave;
+    Button btnSaveUpdate;
     Uri imageUri;
 
 
@@ -54,7 +54,7 @@ public class SetupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
         toolbar=findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Setup Profile");
+        getSupportActionBar().setTitle("Editar perfil");
 
 
         profileImageView= findViewById(R.id.profile_image);
@@ -62,13 +62,15 @@ public class SetupActivity extends AppCompatActivity {
         inputCity= findViewById(R.id.inputCity);
         inputCountry= findViewById(R.id.inputCountry);
         inputProfession= findViewById(R.id.inputProfession);
-        btnSave= findViewById(R.id.btnSaveUpdate);
+        btnSaveUpdate = findViewById(R.id.btnSaveUpdate);
         mLoadingBar= new ProgressDialog(this);
 
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
         mRef= FirebaseDatabase.getInstance().getReference().child("Users");
         StorageRef= FirebaseStorage.getInstance().getReference().child("ProfileImages");
+
+        Toast.makeText(this, "Update Activity", Toast.LENGTH_SHORT).show();
 
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +81,7 @@ public class SetupActivity extends AppCompatActivity {
             }
         });
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnSaveUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SaveData();
@@ -106,7 +108,7 @@ public class SetupActivity extends AppCompatActivity {
         }
         else{
 
-            mLoadingBar.setTitle("Adding Setup Profile");
+            mLoadingBar.setTitle("Actualizando los datos del usuario");
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
             StorageRef.child(mUser.getUid()).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -123,23 +125,20 @@ public class SetupActivity extends AppCompatActivity {
                                 hashMap.put("profession",profession);
                                 hashMap.put("profileImage",uri.toString());
                                 hashMap.put("status","offline");
-                                hashMap.put("score1",0);
-                                hashMap.put("score2",0);
-
 
                                 mRef.child(mUser.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {
                                     @Override
                                     public void onSuccess(Object o) {
-                                        Intent intent = new Intent(SetupActivity.this,MainActivity.class);
+                                        Intent intent = new Intent(UpdateActivity.this,MainActivity.class);
                                         startActivity(intent);
                                         mLoadingBar.dismiss();
-                                        Toast.makeText(SetupActivity.this, "Setup Profile Complete", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateActivity.this, "Datos actualizados correctamente", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
                                     public void onFailure(@NonNull Exception e) {
                                         mLoadingBar.dismiss();
-                                        Toast.makeText(SetupActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(UpdateActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                                     }
                                 });
 

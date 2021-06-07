@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Ranking1"
+    >
+
+    <TextView
+        android:id="@+id/tvRanking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="30dp"
+        android:text="RANKING:"
+        android:textSize="32sp" />
+
+    <ScrollView
+        android:layout_width="358dp"
+        android:layout_height="496dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="27dp">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:orientation="horizontal"
+
+            >
+
+            <TextView
+                android:id="@+id/tvUser1"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore1"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvUser2"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore2"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser3"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore3"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser4"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore4"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser5"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore5"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser6"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore6"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser7"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore7"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser8"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore8"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser9"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore9"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+            <TextView
+                android:id="@+id/tvUser10"
+                android:layout_width="179dp"
+                android:layout_height="match_parent"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="0"
+                app:layout_row="0" />
+
+            <TextView
+                android:id="@+id/tvScore10"
+                android:layout_width="181dp"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text=""
+                app:layout_column="1"
+                app:layout_row="0" />
+        </GridLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

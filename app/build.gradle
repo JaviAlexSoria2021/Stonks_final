@@ -61,6 +61,10 @@ dependencies {
     //firebase messaging services
     implementation 'com.google.firebase:firebase-messaging-directboot:20.2.0'
 
+    //Grid Layout
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
+
+
 
 
 }
