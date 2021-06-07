@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bryansoria.socialappv4.InterfazGame.HomeActivity;
 import com.bryansoria.socialappv4.Model.Comment;
 import com.bryansoria.socialappv4.Model.Posts;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -81,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_post);
 
         toolbar= findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -117,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         usernameHeader=view.findViewById(R.id.username_header);
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        //Post
         sendImagePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         LoadPost();
+
+        //Barra de navegacion
     }
 
     private void LoadPost() {
@@ -383,7 +388,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             case R.id.home:
                 //AÑADIR enlace para home de JAVI
-                Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 break;
             case R.id.profile:
                 startActivity(new Intent(MainActivity.this,ProfileActivity.class));
@@ -393,6 +398,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;*/
             case R.id.listedUsers:
                 startActivity(new Intent(MainActivity.this, ListedUsersActivity.class));
+                break;
+
+            case R.id.post:
+                startActivity(new Intent(MainActivity.this, MainActivity.class));
                 break;
             /*case R.id.chat:
                 startActivity(new Intent(MainActivity.this,ChatUsersActivity.class));
@@ -416,4 +425,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

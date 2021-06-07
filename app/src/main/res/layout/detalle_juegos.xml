@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/fondodetalle3">
+
+    <ImageView
+        android:id="@+id/portada"
+        android:layout_width="158dp"
+        android:layout_height="224dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/descripcion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_toEndOf="@+id/portada"
+        android:layout_toRightOf="@+id/portada"
+        android:hint="Titulo"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/textcolorDetalle"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.257"
+        app:layout_constraintStart_toEndOf="@+id/portada"
+        app:layout_constraintTop_toTopOf="@+id/portada" />
+
+    <TextView
+        android:id="@+id/descripcion"
+        android:layout_width="359dp"
+        android:layout_height="126dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="368dp"
+        android:layout_marginRight="5dp"
+        android:fontFamily="sans-serif"
+        android:hint="Descripcion"
+        android:textColor="@color/textcolorDetalle"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ranking"
+        android:layout_width="103dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="68dp"
+        android:hint="Ranking"
+        android:textColor="@color/textcolorDetalle"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/descripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toEndOf="@+id/portada"
+        app:layout_constraintTop_toBottomOf="@+id/titulo"
+        app:layout_constraintVertical_bias="0.23" />
+
+    <ImageButton
+        android:id="@+id/jugar"
+        android:layout_width="236dp"
+        android:layout_height="66dp"
+        android:background="@drawable/playnoww"
+        android:onClick="lanzarJuegoCliker"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descripcion"
+        app:layout_constraintVertical_bias="0.215" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="148dp"
+        android:onClick="lanzarRanking"
+        android:text="Ranking"
+        app:layout_constraintBottom_toTopOf="@+id/descripcion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/portada" />
+</androidx.constraintlayout.widget.ConstraintLayout>

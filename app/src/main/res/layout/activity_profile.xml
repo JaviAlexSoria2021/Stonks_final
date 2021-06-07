@@ -44,49 +44,56 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
-            <EditText
+            <TextView
                 android:id="@+id/inputUsername"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="276dp"
+                android:layout_height="37dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
 
-            <EditText
+            <TextView
                 android:id="@+id/inputCity"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_width="276dp"
+                android:layout_height="37dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/inputUsername"
-                app:layout_constraintStart_toStartOf="@+id/inputUsername"
                 app:layout_constraintTop_toBottomOf="@+id/inputUsername" />
 
-            <EditText
+            <TextView
                 android:id="@+id/inputCountry"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_width="276dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="24dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/inputCity"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/inputCity"
                 app:layout_constraintTop_toBottomOf="@+id/inputCity" />
 
-            <EditText
+            <TextView
                 android:id="@+id/inputProfession"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_width="276dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="28dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="@+id/inputCountry"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/inputCountry"
                 app:layout_constraintTop_toBottomOf="@+id/inputCountry" />
 
@@ -94,8 +101,6 @@
                 android:id="@+id/btnUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_btn"
                 android:text="Actualizar"
                 android:textAllCaps="false"

@@ -123,8 +123,8 @@ public class SetupActivity extends AppCompatActivity {
                                 hashMap.put("profession",profession);
                                 hashMap.put("profileImage",uri.toString());
                                 hashMap.put("status","offline");
-                                hashMap.put("score1",0);
-                                hashMap.put("score2",0);
+                                hashMap.put("score1","0");
+                                hashMap.put("score2","0");
 
 
                                 mRef.child(mUser.getUid()).updateChildren(hashMap).addOnSuccessListener(new OnSuccessListener() {

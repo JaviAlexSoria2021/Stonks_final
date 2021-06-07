@@ -68,6 +68,6 @@ public class SplashActivity extends AppCompatActivity {
         };
 
         Handler handler = new Handler();
-        handler.postDelayed(runnable,5000); //el activity de inicio solo se ejecuta durante 5 segundos
+        handler.postDelayed(runnable,1500); //el activity de inicio solo se ejecuta durante 5 segundos
     }
 }
