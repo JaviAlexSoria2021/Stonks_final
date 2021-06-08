@@ -1,21 +1,31 @@
 package com.bryansoria.socialappv4.InterfazGame;
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.bryansoria.socialappv4.Game1;
 import com.bryansoria.socialappv4.MainActivity;
 import com.bryansoria.socialappv4.Model.Game;
 import com.bryansoria.socialappv4.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
@@ -24,15 +34,26 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private DatabaseReference mDatabase;
-    private ArrayList juegosJugados = new ArrayList();
-    private ArrayList allGames = new ArrayList();
-    private View decorView;
+    DatabaseReference mUserRef;
+    FirebaseUser mUser;
+    boolean comp;
+    ImageView clicker, dackspirit;
+
+    private ArrayList <Game> allGames = new <Game>ArrayList();
+    private Context context;
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        clicker=(ImageView)findViewById(R.id.imageGameJugado);
+        dackspirit=(ImageView)findViewById(R.id.imageGameJugado2);
+
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
+
 
         //Inicializamos el action Bar
          BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -64,19 +85,40 @@ public class HomeActivity extends AppCompatActivity {
         //Cargamos todos los juegos en el arrayMain
         cargarJuegos.cargar(allGames);
 
-        //Leemos el array con los juegos jugados o lo inicializamos
-        juegosJugados = StorageConfig.leerListaJuego(getApplicationContext());
-        if(juegosJugados==null)
-            juegosJugados=new ArrayList();
+        //Cargamos mis juegos
+
+        //Ahora leemos los datos
+        mUserRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    comp = (boolean)snapshot.child("clicker").getValue();
+                    pintarMisJuegos(comp);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
 
-    public void mandarJuego(Game game){
-        Intent i = new Intent(HomeActivity.this, DetalleJuego.class);
-        i.putExtra("a", game);
-        startActivity(i);
+    public void lanzarJuegoClikerHome(View view){
+        if(clicker.isClickable()) {
+                Intent i = new Intent(HomeActivity.this, Game1.class);
+                startActivity(i);
+            }
     }
+
+    public void pintarMisJuegos(boolean x){
+        if(x){
+            clicker.setImageResource(R.drawable.clikergalleta);
+        }
+    }
+
 
 }
 

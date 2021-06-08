@@ -92,7 +92,32 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
+        <ImageView
+            android:id="@+id/imageGameJugado"
+            android:layout_width="150dp"
+            android:layout_height="145dp"
+            android:layout_marginBottom="56dp"
+            android:onClick="lanzarJuegoClikerHome"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.091"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewMisJuegos"
+            app:layout_constraintVertical_bias="0.564"
+            tools:ignore="MissingConstraints" />
 
+        <ImageView
+            android:id="@+id/imageGameJugado2"
+            android:layout_width="147dp"
+            android:layout_height="134dp"
+            android:layout_marginBottom="84dp"
+            android:scaleType="fitStart"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.852"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

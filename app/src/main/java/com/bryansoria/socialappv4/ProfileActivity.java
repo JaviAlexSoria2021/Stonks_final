@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
-        //Ahora leemmos los datos
+        //Ahora leemos los datos
         mUserRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
