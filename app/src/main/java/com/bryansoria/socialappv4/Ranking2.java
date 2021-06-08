@@ -77,7 +77,7 @@ public class Ranking2 extends AppCompatActivity {
                         Collections.sort(score, new Comparator<Users>() {
                             @Override
                             public int compare(Users o1, Users o2) {
-                                return new String(o2.getScore2best()).compareTo(new String(o1.getScore2best()));
+                                return new String(o1.getScore2best()).compareTo(new String(o2.getScore2best()));
                             }
                         });
                         int aux = (score.size() - 1);
