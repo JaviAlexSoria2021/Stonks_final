@@ -3,11 +3,9 @@ package com.bryansoria.socialappv4.InterfazGame;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +16,7 @@ import com.bryansoria.socialappv4.Game1;
 import com.bryansoria.socialappv4.MainActivity;
 import com.bryansoria.socialappv4.Model.Game;
 import com.bryansoria.socialappv4.R;
+import com.bryansoria.socialappv4.besdblackspiritgame.MainActivityDarkSpirit;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,8 +35,8 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     DatabaseReference mUserRef;
     FirebaseUser mUser;
-    boolean comp;
-    ImageView clicker, dackspirit;
+    boolean comp , comp2;
+    ImageView clicker, darkspirit;
 
     private ArrayList <Game> allGames = new <Game>ArrayList();
     private Context context;
@@ -48,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         clicker=(ImageView)findViewById(R.id.imageGameJugado);
-        dackspirit=(ImageView)findViewById(R.id.imageGameJugado2);
+        darkspirit =(ImageView)findViewById(R.id.imageGameJugado2);
 
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -85,15 +84,15 @@ public class HomeActivity extends AppCompatActivity {
         //Cargamos todos los juegos en el arrayMain
         cargarJuegos.cargar(allGames);
 
-        //Cargamos mis juegos
-
         //Ahora leemos los datos
         mUserRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     comp = (boolean)snapshot.child("clicker").getValue();
-                    pintarMisJuegos(comp);
+                        pintarJuegoUno(comp);
+                    comp2 = (boolean)snapshot.child("darkspirit").getValue();
+                        pintarJuegoDos(comp2);
                 }
             }
             @Override
@@ -113,12 +112,23 @@ public class HomeActivity extends AppCompatActivity {
             }
     }
 
-    public void pintarMisJuegos(boolean x){
+    public void lanzarJuegoDarkSpiritHome(View view){
+        if(darkspirit.isClickable()) {
+            Intent i = new Intent(HomeActivity.this, MainActivityDarkSpirit.class);
+            startActivity(i);
+        }
+    }
+
+    public void pintarJuegoUno(boolean x){
         if(x){
             clicker.setImageResource(R.drawable.clikergalleta);
         }
     }
-
+    public void pintarJuegoDos(boolean x){
+        if(x){
+            darkspirit.setImageResource(R.drawable.blackbird);
+        }
+    }
 
 }
 

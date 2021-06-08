@@ -18,7 +18,11 @@
         <activity android:name=".InterfazGame.Biblioteca"/>
         <activity android:name=".InterfazGame.DetalleJuego"/>
         <activity android:name=".InterfazGame.HomeActivity"/>
+        <activity android:name=".besdblackspiritgame.MainActivityDarkSpirit"></activity>
+        <activity android:name=".besdblackspiritgame.GameOver"></activity>
+        <activity android:name=".besdblackspiritgame.GameActivity"></activity>
         <activity android:name=".Ranking1"></activity>
+        <activity android:name=".Ranking2"></activity>
         <activity android:name=".Game1"></activity>
         <activity android:name=".ChatUsersActivity" />
         <activity android:name=".ChatActivity" />

@@ -125,6 +125,7 @@ public class SetupActivity extends AppCompatActivity {
                                 hashMap.put("status","offline");
                                 hashMap.put("score1","0");
                                 hashMap.put("score2","0");
+                                hashMap.put("score2best","0");
                                 hashMap.put("clicker", false);
                                 hashMap.put("darkspirit", false);
 

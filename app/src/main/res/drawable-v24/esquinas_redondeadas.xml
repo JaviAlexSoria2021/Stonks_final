@@ -4,8 +4,9 @@
     android:shape="rectangle">
 
     <!-- Color de fondo de la vista -->
-    <solid>
-
+    <!-- Color de fondo de la vista -->
+    <solid
+        android:color="#33808080" >
     </solid>
 
     <!-- Color y ancho del borde del elemento -->

@@ -2,7 +2,7 @@ package com.bryansoria.socialappv4.Model;
 
 public class Users {
 
-    private String city,country,profession,profileImage,username,status,score1, score2;
+    private String city,country,profession,profileImage,username,status,score1, score2, score2best;
 
     public Users() {
     }
@@ -15,6 +15,10 @@ public class Users {
         this.username = username;
         this.status = status;
     }
+
+    public String getScore2best() { return score2best; }
+
+    public void setScore2best(String score2best) { this.score2best = score2best; }
 
     public String getScore2() {
         return score2;
@@ -79,4 +83,5 @@ public class Users {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }
