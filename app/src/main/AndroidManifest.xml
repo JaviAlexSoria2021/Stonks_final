@@ -25,7 +25,6 @@
         <activity android:name=".Ranking1"></activity>
         <activity android:name=".Ranking2"></activity>
         <activity android:name=".Game1"></activity>
-        <activity android:name=".ChatUsersActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".ImageViewActivity" />
         <activity android:name=".FriendActivity" />

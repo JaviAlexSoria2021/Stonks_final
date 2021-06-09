@@ -101,13 +101,13 @@ public class SetupActivity extends AppCompatActivity {
         String profession = inputProfession.getText().toString();
 
         if (username.isEmpty() || username.length()<3){
-            showError(inputUsername,"Debe tener al menos 3 caracteres");
+            messageError(inputUsername,"Debe tener al menos 3 caracteres");
         }else if (city.isEmpty()|| city.length()<3){
-            showError(inputCity,"Debe tener al menos 3 caracteres");
+            messageError(inputCity,"Debe tener al menos 3 caracteres");
         }else if (country.isEmpty()|| country.length()<3){
-            showError(inputCountry,"Debe tener al menos 3 caracteres");
+            messageError(inputCountry,"Debe tener al menos 3 caracteres");
         }else if (profession.isEmpty()|| profession.length()<3){
-            showError(inputProfession,"Debe tener al menos 3 caracteres");
+            messageError(inputProfession,"Debe tener al menos 3 caracteres");
         }else if (imageUri==null){
             Toast.makeText(this, "Por favor selecciona una imagen de perfil.", Toast.LENGTH_SHORT).show();
         }
@@ -161,7 +161,7 @@ public class SetupActivity extends AppCompatActivity {
         }
     }
 
-    private void showError(EditText input, String s) {
+    private void messageError(EditText input, String s) {
         input.setError(s);
         input.requestFocus();
     }

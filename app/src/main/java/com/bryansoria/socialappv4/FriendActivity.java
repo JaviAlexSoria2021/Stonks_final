@@ -1,5 +1,3 @@
-
-//CLASE FRIENDS Y FIND FRIENDS REEMPLAZADAS POR USUARIOS (FRIENDS ELIMINADA)
 package com.bryansoria.socialappv4;
 
 import androidx.annotation.NonNull;

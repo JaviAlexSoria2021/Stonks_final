@@ -67,18 +67,17 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword = inputConfirmPassword.getEditText().getText().toString();
 
         if (email.isEmpty() || !email.contains("@gmail")){
-            showError(inputEmail,"Email no válido");
+            messageError(inputEmail,"Email no válido");
         }else if (password.isEmpty() || password.length()<5){
-            showError(inputPassword, "La contraseña dene tener al menos 6 caracteres");
+            messageError(inputPassword, "La contraseña dene tener al menos 6 caracteres");
         }else if (!confirmPassword.equals(password)){
-            showError(inputConfirmPassword,"Las contraseñas no coinciden.");
+            messageError(inputConfirmPassword,"Las contraseñas no coinciden.");
         }else{
             mLoadingBar.setTitle("Registro");;
             mLoadingBar.setMessage("Por favor espere.");
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
 
-            //ALEX
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>(){
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -102,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void showError(TextInputLayout field, String text) {
+    private void messageError(TextInputLayout field, String text) {
         field.setError(text);
         field.requestFocus();
     }

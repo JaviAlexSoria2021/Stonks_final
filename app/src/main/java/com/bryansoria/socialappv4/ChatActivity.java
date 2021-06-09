@@ -30,11 +30,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.HashMap;
-import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -45,14 +41,14 @@ public class ChatActivity extends AppCompatActivity {
     EditText inputSms;
     ImageView btnSend;
     CircleImageView userProfileImageAppbar;
-    TextView usernameAppbar; //status
+    TextView usernameAppbar;
 
     String OtherUserID;
 
     DatabaseReference mUserRef,smsRef;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    String OtherUsername,OtherUserProfileImageLink;//OtherUserStatus
+    String OtherUsername,OtherUserProfileImageLink;
     FirebaseRecyclerOptions<Chat>options;
     FirebaseRecyclerAdapter<Chat,ChatMyViewHolder>adapter;
     String myProfileImageLink;
@@ -75,7 +71,6 @@ public class ChatActivity extends AppCompatActivity {
         btnSend = findViewById(R.id.btnSend);
         userProfileImageAppbar = findViewById(R.id.userProfileImageAppbar);
         usernameAppbar = findViewById(R.id.usernameAppbar);
-        //status = findViewById(R.id.status);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAuth = FirebaseAuth.getInstance();
@@ -90,21 +85,21 @@ public class ChatActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SendSMS();
+                sendMessage();
             }
         });
 
         LoadSMS();
 
     }
-
+    //Carga la imagen de perfil de los usuarios mientras que "chatean"
     private void LoadProfile() {
         //carga la imagen desde la base de datos
         mUserRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
-                    myProfileImageLink = snapshot.child("profileImage").getValue().toString();
+                    myProfileImageLink = snapshot.child("profileImage").getValue().toString();//recogemos la imagen desde el usuario
                     username = snapshot.child("username").getValue().toString();
                 }
             }
@@ -118,6 +113,7 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+    //Metodo para cargar los mensajes del chat
     private void LoadSMS() {
         options = new FirebaseRecyclerOptions.Builder<Chat>().setQuery(smsRef.child(mUser.getUid()).child(OtherUserID),Chat.class).build();
         adapter = new FirebaseRecyclerAdapter<Chat, ChatMyViewHolder>(options) {
@@ -157,14 +153,13 @@ public class ChatActivity extends AppCompatActivity {
 
 
     //Metodo para enviar mensajes
-    private void SendSMS() {
+    private void sendMessage() {
         String sms = inputSms.getText().toString();
         if (sms.isEmpty()){
             Toast.makeText(this, "Por favor introduzca algo de texto", Toast.LENGTH_SHORT).show();
         } else {
             HashMap hashMap = new HashMap();
             hashMap.put("sms",sms);
-            //hashMap.put("status","unseen");
             hashMap.put("userID",mUser.getUid());
             smsRef.child(OtherUserID).child(mUser.getUid()).push().updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
@@ -189,7 +184,7 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-
+    //Cargamos la informacion del otro usuario en el chat
     private void LoadOtherUser() {
         mUserRef.child(OtherUserID).addValueEventListener(new ValueEventListener() {
             @Override

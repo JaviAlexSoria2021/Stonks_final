@@ -25,7 +25,6 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.internal.tls.BasicTrustRootIndex;
 
 public class ViewFriendActivity extends AppCompatActivity {
 
@@ -54,8 +53,6 @@ public class ViewFriendActivity extends AppCompatActivity {
 
         userID = getIntent().getStringExtra("userKey");
 
-        //Toast.makeText(this, ""+userID, Toast.LENGTH_SHORT).show();
-
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         requestRef = FirebaseDatabase.getInstance().getReference().child("Requests");
         friendRef = FirebaseDatabase.getInstance().getReference().child("Friends");
@@ -77,11 +74,11 @@ public class ViewFriendActivity extends AppCompatActivity {
         btnPerform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerformAction(userID);
+                Actions(userID);
             }
         });
 
-        CheckUserExistance(userID);
+        CheckUser(userID);
 
         //Boton de rechazar solicitud de amistad
         btnDecline.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +133,7 @@ public class ViewFriendActivity extends AppCompatActivity {
         }
     }
 
-    private void CheckUserExistance(String userID) {
+    private void CheckUser(String userID) {
         friendRef.child(mUser.getUid()).child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -219,7 +216,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                     }
     }
 
-    private void PerformAction(String userID) {
+    private void Actions(String userID) {
         //Primer Estado en donde los usuarios no se han enviado ninguna petion el uno al otro
         //es decir, aun no son amigos
         if (CurrentState.equals("no_event")){
@@ -266,7 +263,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                         hashMap.put("status","friend");
                         hashMap.put("username",username);
                         hashMap.put("profileImageUrl",profileImageUrl);
-                        hashMap.put("profession",profession);
+                        hashMap.put("profession",profession);//Cuando aceptamos la peticion de amistad necesitamos guardar la informacion del otro usuario
 
                         final HashMap hashMap1 = new HashMap();
                         hashMap.put("status","friend");
@@ -297,7 +294,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                 }
             });
         }
-        //Si ya se es "amigo" se podra acceder directamente al chat
+        //Si ya se es "amigo" se podra acceder  al chat
         if (CurrentState.equals("friend")){
             Intent intent = new Intent(ViewFriendActivity.this,ChatActivity.class);
             intent.putExtra("OtherUserID",userID);
@@ -314,7 +311,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     profileImageUrl = snapshot.child("profileImage").getValue().toString();
                     username = snapshot.child("username").getValue().toString();
-                    city = snapshot.child("city").getValue().toString(); //REVISAR VIDEO 33 LINA DUPLICADA EN SU VIDEO
+                    city = snapshot.child("city").getValue().toString();
                     country = snapshot.child("country").getValue().toString();
                     profession = snapshot.child("profession").getValue().toString();
 

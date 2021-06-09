@@ -24,10 +24,7 @@ import com.squareup.picasso.Picasso;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProfileActivity extends AppCompatActivity {
-
-    /*
-     * En esta activity mostrare los datos del usuario
-    * */
+    
 
     CircleImageView profileImageView;
     TextView inputUsername,inputCity,inputCountry,inputProfession;

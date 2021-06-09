@@ -99,13 +99,13 @@ public class UpdateActivity extends AppCompatActivity {
         String profession = inputProfession.getText().toString();
 
         if (username.isEmpty() || username.length()<3){
-            showError(inputUsername,"Nombre de usuario no es válido");
+            messageError(inputUsername,"Nombre de usuario no es válido");
         }else if (city.isEmpty()|| city.length()<3){
-            showError(inputCity,"La ciudad no es válida");
+            messageError(inputCity,"La ciudad no es válida");
         }else if (country.isEmpty()|| country.length()<3){
-            showError(inputCountry,"El pais no es válido");
+            messageError(inputCountry,"El pais no es válido");
         }else if (profession.isEmpty()|| profession.length()<3){
-            showError(inputProfession,"La profesion no es válida");
+            messageError(inputProfession,"La profesion no es válida");
         }else if (imageUri==null){
             Toast.makeText(this, "Por favor seleccione una imagen.", Toast.LENGTH_SHORT).show();
         }
@@ -153,7 +153,7 @@ public class UpdateActivity extends AppCompatActivity {
         }
     }
 
-    private void showError(EditText input, String s) {
+    private void messageError(EditText input, String s) {
         input.setError(s);
         input.requestFocus();
     }

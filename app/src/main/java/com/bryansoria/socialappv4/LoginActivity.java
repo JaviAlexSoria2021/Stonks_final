@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         inputEmail=findViewById(R.id.inputEmail);
         inputPassword=findViewById(R.id.inputPassword);
         btnLogin=findViewById(R.id.btnLogin);
-        //forgotPassword=findViewById(R.id.forgotPassword);
         createNewAccount=findViewById(R.id.createNewAccount);
         mLoadingBar= new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
@@ -67,9 +65,9 @@ public class LoginActivity extends AppCompatActivity {
         String password = inputPassword.getEditText().getText().toString();
 
         if (email.isEmpty() || !email.contains("@gmail")){
-            showError(inputEmail,"Email no válido");
+            messageError(inputEmail,"Email no válido");
         }else if (password.isEmpty() || password.length()<5){
-            showError(inputPassword, "Contraseña no válida");
+            messageError(inputPassword, "Contraseña no válida");
         }else{
             mLoadingBar.setTitle("Login");;
             mLoadingBar.setMessage("Por favor espere.");
@@ -95,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void showError(TextInputLayout field, String text) {
+    private void messageError(TextInputLayout field, String text) {
         field.setError(text);
         field.requestFocus();
     }
