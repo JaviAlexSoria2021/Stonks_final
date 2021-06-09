@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,6 +53,9 @@ public class UpdateActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         toolbar=findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Editar perfil");
@@ -70,7 +74,6 @@ public class UpdateActivity extends AppCompatActivity {
         mRef= FirebaseDatabase.getInstance().getReference().child("Users");
         StorageRef= FirebaseStorage.getInstance().getReference().child("ProfileImages");
 
-        Toast.makeText(this, "Update Activity", Toast.LENGTH_SHORT).show();
 
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,15 +99,15 @@ public class UpdateActivity extends AppCompatActivity {
         String profession = inputProfession.getText().toString();
 
         if (username.isEmpty() || username.length()<3){
-            showError(inputUsername,"Username is not valid!");
+            showError(inputUsername,"Nombre de usuario no es válido");
         }else if (city.isEmpty()|| city.length()<3){
-            showError(inputCity,"City is not valid!");
+            showError(inputCity,"La ciudad no es válida");
         }else if (country.isEmpty()|| country.length()<3){
-            showError(inputCountry,"Country is not valid!");
+            showError(inputCountry,"El pais no es válido");
         }else if (profession.isEmpty()|| profession.length()<3){
-            showError(inputProfession,"Profession is not valid!");
+            showError(inputProfession,"La profesion no es válida");
         }else if (imageUri==null){
-            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Por favor seleccione una imagen.", Toast.LENGTH_SHORT).show();
         }
         else{
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SetupActivity">
+    tools:context=".SetupActivity"
+    android:background="@drawable/lila">
 
     <include layout="@layout/main_appbar"
         android:id="@+id/app_bar"/>
@@ -21,7 +22,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/lila">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
@@ -85,6 +87,7 @@
                 android:id="@+id/btnSaveUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorPrimary"
                 android:text="Guardar"
                 app:layout_constraintEnd_toEndOf="@+id/inputProfession"
                 app:layout_constraintStart_toStartOf="@+id/inputProfession"

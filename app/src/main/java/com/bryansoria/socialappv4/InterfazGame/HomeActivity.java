@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         clicker=(ImageView)findViewById(R.id.imageGameJugado);
         darkspirit =(ImageView)findViewById(R.id.imageGameJugado2);

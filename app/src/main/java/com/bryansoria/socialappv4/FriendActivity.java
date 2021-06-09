@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.bryansoria.socialappv4.Model.Friends;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -45,6 +46,8 @@ public class FriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friend);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Friends");
@@ -70,7 +73,7 @@ public class FriendActivity extends AppCompatActivity {
                 holder.username.setText(model.getUsername());
                 holder.profession.setText(model.getUsername());
 
-
+                //Cargamos el usuario para verlo
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

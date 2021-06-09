@@ -10,18 +10,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.bryansoria.socialappv4.Model.Chat;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -51,19 +45,17 @@ public class ChatActivity extends AppCompatActivity {
     EditText inputSms;
     ImageView btnSend;
     CircleImageView userProfileImageAppbar;
-    TextView usernameAppbar,status;
+    TextView usernameAppbar; //status
 
     String OtherUserID;
 
     DatabaseReference mUserRef,smsRef;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    String OtherUsername,OtherUserProfileImageLink,OtherUserStatus;
+    String OtherUsername,OtherUserProfileImageLink;//OtherUserStatus
     FirebaseRecyclerOptions<Chat>options;
     FirebaseRecyclerAdapter<Chat,ChatMyViewHolder>adapter;
     String myProfileImageLink;
-    String URL = "https://fcm.googleapis.com/fcm/send";//usaremos un objeto json para enviar la notificacion
-    RequestQueue requestQueue;
     String username;
 
 
@@ -71,17 +63,19 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         toolbar= findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         OtherUserID = getIntent().getStringExtra("OtherUserID");
 
-        requestQueue = Volley.newRequestQueue(this);
         recyclerView = findViewById(R.id.recyclerView);
         inputSms = findViewById(R.id.inputSms);
         btnSend = findViewById(R.id.btnSend);
         userProfileImageAppbar = findViewById(R.id.userProfileImageAppbar);
         usernameAppbar = findViewById(R.id.usernameAppbar);
-        status = findViewById(R.id.status);
+        //status = findViewById(R.id.status);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAuth = FirebaseAuth.getInstance();
@@ -124,7 +118,6 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
-    //CHAT  39
     private void LoadSMS() {
         options = new FirebaseRecyclerOptions.Builder<Chat>().setQuery(smsRef.child(mUser.getUid()).child(OtherUserID),Chat.class).build();
         adapter = new FirebaseRecyclerAdapter<Chat, ChatMyViewHolder>(options) {
@@ -163,7 +156,7 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-    //Revisar para postear mas de una vez 37
+    //Metodo para enviar mensajes
     private void SendSMS() {
         String sms = inputSms.getText().toString();
         if (sms.isEmpty()){
@@ -171,7 +164,7 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             HashMap hashMap = new HashMap();
             hashMap.put("sms",sms);
-            hashMap.put("status","unseen");
+            //hashMap.put("status","unseen");
             hashMap.put("userID",mUser.getUid());
             smsRef.child(OtherUserID).child(mUser.getUid()).push().updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
@@ -183,7 +176,7 @@ public class ChatActivity extends AppCompatActivity {
                                 if (task.isSuccessful()){
                                     //sendNotification(sms);
                                     inputSms.setText(null);
-                                    Toast.makeText(ChatActivity.this, "SMS sent", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ChatActivity.this, "Mensaje enviado", Toast.LENGTH_SHORT).show();
                                 }
 
                             }
@@ -196,50 +189,6 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    //QUITAR SI NO ENTIENDO LA EXPLICACION 42
-    /*
-    private void sendNotification(String sms) {
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("to","/topics/"+OtherUserID);
-            JSONObject jsonObject1 = new JSONObject();
-            jsonObject1.put("title", "Message from "+username);
-            jsonObject1.put("body",sms);
-
-
-            JSONObject jsonObject2 = new JSONObject();
-            jsonObject2.put("userID",mUser.getUid());
-            jsonObject2.put("type","sms");
-
-
-            jsonObject.put("notification",jsonObject1);
-            jsonObject.put("data",jsonObject2);
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST,URL, jsonObject, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-
-                }
-            }, new Response.ErrorListener(){
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            }){
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String,String>map = new HashMap<>();
-                    map.put("content-type","application/json");
-                    map.put("authorization","key=AAAAoz7veQg:APA91bG2w4no53XXganWL_Wm3qwox_dnGQYGxHSybAJnbIO4ESpYVMB0ITDLakwtvvW-cxDwXy4hdWbwLMoXlBF6FbSh2Nyyz5c_8YS2Nwi8o1R3IGfdOHmCEKs1pE9ZaW0yRK7FLKSa");
-                    return map;
-                }
-            };
-            requestQueue.add(request);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }*/
 
     private void LoadOtherUser() {
         mUserRef.child(OtherUserID).addValueEventListener(new ValueEventListener() {
@@ -248,11 +197,11 @@ public class ChatActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     OtherUsername = snapshot.child("username").getValue().toString();
                     OtherUserProfileImageLink = snapshot.child("profileImage").getValue().toString();
-                    OtherUserStatus = snapshot.child("status").getValue().toString();
+                    //OtherUserStatus = snapshot.child("status").getValue().toString();
 
                     Picasso.get().load(OtherUserProfileImageLink).into(userProfileImageAppbar);
                     usernameAppbar.setText(OtherUsername);
-                    status.setText(OtherUserStatus);
+                    //status.setText(OtherUserStatus);
 
                 }
             }

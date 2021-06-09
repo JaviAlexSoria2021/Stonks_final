@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -22,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout inputEmail,inputPassword;
     Button btnLogin;
-    TextView forgotPassword,createNewAccount;
+    TextView createNewAccount;
     ProgressDialog mLoadingBar;
     FirebaseAuth mAuth;
 
@@ -32,14 +33,17 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         inputEmail=findViewById(R.id.inputEmail);
         inputPassword=findViewById(R.id.inputPassword);
         btnLogin=findViewById(R.id.btnLogin);
-        forgotPassword=findViewById(R.id.forgotPassword);
+        //forgotPassword=findViewById(R.id.forgotPassword);
         createNewAccount=findViewById(R.id.createNewAccount);
         mLoadingBar= new ProgressDialog(this);
         mAuth = FirebaseAuth.getInstance();
 
+        //Crear nueva cuenta
         createNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        //Iniciar Sesion
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,17 +61,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    //Este metodo controlara los datos introducidos por el usuario
     private void AtamptLogin() {
         String email = inputEmail.getEditText().getText().toString();
         String password = inputPassword.getEditText().getText().toString();
 
         if (email.isEmpty() || !email.contains("@gmail")){
-            showError(inputEmail,"Email is not Valid!");
+            showError(inputEmail,"Email no válido");
         }else if (password.isEmpty() || password.length()<5){
-            showError(inputPassword, "Password must be greated than 5 letters");
+            showError(inputPassword, "Contraseña no válida");
         }else{
             mLoadingBar.setTitle("Login");;
-            mLoadingBar.setMessage("Please wait,While your Credentials");
+            mLoadingBar.setMessage("Por favor espere.");
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
 
@@ -74,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         mLoadingBar.dismiss();
-                        Toast.makeText(LoginActivity.this, "Login is successfull", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Se ha iniciado sesion correctamente", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class); //,SetupActivity.class asi antes
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

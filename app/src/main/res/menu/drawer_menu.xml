@@ -4,22 +4,25 @@
     <group android:id="@+id/first">
 
         <item android:id="@+id/home"
-            android:title="home"
+            android:title="Home"
             android:icon="@drawable/ic_home"/>
 
+
         <item android:id="@+id/profile"
-            android:title="Profile"
+            android:title="Perfil"
             android:icon="@drawable/ic_profile"/>
 
         <item android:id="@+id/listedUsers"
-            android:title="Users"
+            android:title="Usuarios"
             android:icon="@drawable/ic_find_friend"/>
 
 
     </group>
     <group android:id="@+id/second">
         <item android:id="@+id/logout"
-            android:title="Logout"
+            android:title="Cerrar sesión"
             android:icon="@drawable/ic_logout"/>
     </group>
+
+
 </menu>

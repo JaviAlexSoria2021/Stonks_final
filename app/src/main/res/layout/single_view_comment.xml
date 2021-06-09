@@ -23,7 +23,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="Username"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/profileImage_comment"
         app:layout_constraintTop_toTopOf="@+id/profileImage_comment" />

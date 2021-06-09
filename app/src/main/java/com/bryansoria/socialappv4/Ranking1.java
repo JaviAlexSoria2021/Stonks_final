@@ -1,6 +1,7 @@
 package com.bryansoria.socialappv4;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class Ranking1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking1);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         tvUser1 = (TextView) findViewById(R.id.tvUser1);
         tvUser2 = (TextView) findViewById(R.id.tvUser2);

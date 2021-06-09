@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         inputEmail=findViewById(R.id.inputEmail);
         inputPassword=findViewById(R.id.inputPassword);
         inputConfirmPassword=findViewById(R.id.inputConfirmPassword);
@@ -46,6 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        //Controla el boton de "ya tengo una cuenta"
         alreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,20 +60,21 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    //Este metodo registrara un usuario siempre y cuando cumpla con los requisitos
     private void AtemptRegistration() {
         String email = inputEmail.getEditText().getText().toString();
         String password = inputPassword.getEditText().getText().toString();
         String confirmPassword = inputConfirmPassword.getEditText().getText().toString();
 
         if (email.isEmpty() || !email.contains("@gmail")){
-            showError(inputEmail,"Email is not Valid!");
+            showError(inputEmail,"Email no válido");
         }else if (password.isEmpty() || password.length()<5){
-            showError(inputPassword, "Password must be greated than 5 letters");
+            showError(inputPassword, "La contraseña dene tener al menos 6 caracteres");
         }else if (!confirmPassword.equals(password)){
-            showError(inputConfirmPassword,"Password did not Match!");
+            showError(inputConfirmPassword,"Las contraseñas no coinciden.");
         }else{
-            mLoadingBar.setTitle("Registration");;
-            mLoadingBar.setMessage("Please wait,While your Credentials");
+            mLoadingBar.setTitle("Registro");;
+            mLoadingBar.setMessage("Por favor espere.");
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
 
@@ -80,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
 
                         mLoadingBar.dismiss();
-                        Toast.makeText(RegisterActivity.this, "Registration is successfull", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Se ha registrado correctamente.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(RegisterActivity.this,SetupActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -90,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
                     else{
 
                         mLoadingBar.dismiss();
-                        Toast.makeText(RegisterActivity.this, "Registration is Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "El registro ha fallado.", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

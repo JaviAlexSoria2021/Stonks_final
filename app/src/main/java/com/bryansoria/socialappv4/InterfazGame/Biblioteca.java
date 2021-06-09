@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -39,6 +40,8 @@ public class Biblioteca extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_biblioteca);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         //Inicializamos el action Bar
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId((R.id.biblioteca));
@@ -68,7 +71,7 @@ public class Biblioteca extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         //Leemos el array con los juegos o lo inicializamos
-        juegos = StorageConfig.leerListaJuego(getApplicationContext());
+        //juegos = StorageConfig.leerListaJuego(getApplicationContext());
         if(juegos==null)
             juegos=new ArrayList();
 

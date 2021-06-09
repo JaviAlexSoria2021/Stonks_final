@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:background="@drawable/fondonove">
+        android:background="@drawable/lila"><!--fondonove-->
 
         <TextView
             android:id="@+id/textViewNovedades"

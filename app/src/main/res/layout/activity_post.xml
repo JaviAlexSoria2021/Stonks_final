@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:id="@+id/drawerLayout">
+    android:id="@+id/drawerLayout"
+    android:background="@drawable/post">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/post">
 
         <include
             android:id="@+id/app_bar"
@@ -23,7 +25,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/input_add_post_bg"
-            android:hint="Write something here"
+            android:hint="Descripción del post"
             android:paddingStart="50dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
@@ -61,7 +63,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/inputAddPost"
-            android:background="@color/colorGray"/>
+            android:background="@drawable/lila"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -71,6 +73,7 @@
         android:id="@+id/navView"
         android:layout_gravity="start"
         app:menu="@menu/drawer_menu"
+        android:background="@drawable/post"
         />
 
 

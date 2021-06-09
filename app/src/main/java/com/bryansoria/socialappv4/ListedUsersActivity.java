@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.bryansoria.socialappv4.Model.Users;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -43,9 +44,11 @@ public class ListedUsersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listed_users);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         toolbar=findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Find Friends");
+        getSupportActionBar().setTitle("Lista de Usuarios");
 
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -56,16 +59,15 @@ public class ListedUsersActivity extends AppCompatActivity {
 
         LoadUsers("");
     }
-    //Leemos los usuarios que existen en nuestra base de datos 25
+    //Leemos los usuarios que existen en nuestra base de datos
     private void LoadUsers(String s) {
-        //Futura query que usare para realizar el buscador
         Query query = mUserRef.orderByChild("username").startAt(s).endAt(s+"\uf8ff");
         options = new FirebaseRecyclerOptions.Builder<Users>().setQuery(query,Users.class).build();
         adapter = new FirebaseRecyclerAdapter<Users, ListedUsersViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull ListedUsersViewHolder holder, int position, @NonNull Users model) {
 
-                //Oculta nuestro Usuario REVISAR Explicacion 26
+                //Ocultamos nuestro perfil al mostrar la lista
                 if (!mUser.getUid().equals(getRef(position).getKey().toString())){
                     Picasso.get().load(model.getProfileImage()).into(holder.profileImage);
                     holder.username.setText(model.getUsername());
@@ -74,7 +76,7 @@ public class ListedUsersActivity extends AppCompatActivity {
                     holder.itemView.setVisibility(View.GONE);
                     holder.itemView.setLayoutParams(new RecyclerView.LayoutParams(0,0));
                 }
-                //Cuando el usuario pulse encima de alguno de los usuarios mostrados en la lista de buscar amigos se mostrara su perfil de usuario
+                //Cuando el usuario pulse encima de alguno de los usuarios mostrados en la lista de usuarios se mostrara su perfil de usuario
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -101,11 +103,11 @@ public class ListedUsersActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    //Buscador
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_menu,menu);
         MenuItem menuItem = menu.findItem(R.id.search);
-        //SI ALGO FALLAREVISAR 26 PORQUE EN EL search_menu esty usando el androix no el normal
         SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -115,6 +117,9 @@ public class ListedUsersActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+                //Cuando se escriba algo en el buscador llamaremos al metodo LoadUsers
+                //el cual se encargara de buscar la informacion en la base de datos
+                //en funcion de lo que se haya escrito
                 LoadUsers(s);
                 return false;
             }

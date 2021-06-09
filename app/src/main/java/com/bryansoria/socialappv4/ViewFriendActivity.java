@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,7 @@ public class ViewFriendActivity extends AppCompatActivity {
     CircleImageView profileImage;
     TextView Username,address;
     Button btnPerform,btnDecline;
-    String CurrentState="nothing_happen";
+    String CurrentState="no_event";
     String profession;
     String userID;
 
@@ -48,6 +49,9 @@ public class ViewFriendActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_friend);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         userID = getIntent().getStringExtra("userKey");
 
         Toast.makeText(this, ""+userID, Toast.LENGTH_SHORT).show();
@@ -69,6 +73,7 @@ public class ViewFriendActivity extends AppCompatActivity {
 
         LoadMyProfile();
 
+        //Boton de enviar solicitud de amistad
         btnPerform.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +82,8 @@ public class ViewFriendActivity extends AppCompatActivity {
         });
 
         CheckUserExistance(userID);
+
+        //Boton de rechazar solicitud de amistad
         btnDecline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +94,7 @@ public class ViewFriendActivity extends AppCompatActivity {
 
     }
 
+    //metodo para eliminar un amigo
     private void Unfriend(String userID) {
         if (CurrentState.equals("friend"))
         {
@@ -98,9 +106,9 @@ public class ViewFriendActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
-                                    Toast.makeText(ViewFriendActivity.this, "You are unfriend", Toast.LENGTH_SHORT).show();
-                                    CurrentState = "nothing_happen";
-                                    btnPerform.setText("Send friend request");
+                                    Toast.makeText(ViewFriendActivity.this, "Se ha eliminado de amigos", Toast.LENGTH_SHORT).show();
+                                    CurrentState = "no_event";
+                                    btnPerform.setText("Enviar solicitud de amistad.");
                                     btnDecline.setVisibility(View.GONE);
                                 }
                             }
@@ -110,6 +118,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                 }
             });
         }
+        //Este metodo comprueba si los usuarios son amigos
         if (CurrentState.equals("he_sent_pending")){
             HashMap hashMap = new HashMap();
             hashMap.put("status","decline");
@@ -117,7 +126,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(ViewFriendActivity.this, "You have decline friend", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewFriendActivity.this, "Has rechazado la solicitud de amistad", Toast.LENGTH_SHORT).show();
                         CurrentState="he_sent_decline";
                         btnPerform.setVisibility(View.GONE);
                         btnDecline.setVisibility(View.GONE);
@@ -133,8 +142,8 @@ public class ViewFriendActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     CurrentState="friend";
-                    btnPerform.setText("Send SMS");
-                    btnDecline.setText("Unfriend");
+                    btnPerform.setText("Enviar Mensaje");
+                    btnDecline.setText("Eliminar amigo");
                     btnDecline.setVisibility(View.VISIBLE);
                 }
             }
@@ -149,8 +158,8 @@ public class ViewFriendActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     CurrentState="friend";
-                    btnPerform.setText("Send SMS");
-                    btnDecline.setText("Unfriend");
+                    btnPerform.setText("Enviar Mensaje");
+                    btnDecline.setText("Eliminar amigo");
                     btnDecline.setVisibility(View.VISIBLE);
                 }
             }
@@ -160,18 +169,19 @@ public class ViewFriendActivity extends AppCompatActivity {
 
             }
         });
+        //dependiendo de las condiciones tendremos que cambiar los estados de los usuarios
         requestRef.child(mUser.getUid()).child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     if (snapshot.child("status").getValue().toString().equals("pending")){
                         CurrentState = "I_sent_pending";
-                        btnPerform.setText("Cancel friend request");
+                        btnPerform.setText("Cancelar solicitud de amistad");
                         btnDecline.setVisibility(View.GONE);
                     }
                     if (snapshot.child("status").getValue().toString().equals("decline")){
                         CurrentState = "I_sent_decline";
-                        btnPerform.setText("Cancel friend request");
+                        btnPerform.setText("Cancelar solicitud de amistad");
                         btnDecline.setVisibility(View.GONE);
                     }
                 }
@@ -188,8 +198,8 @@ public class ViewFriendActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     if (snapshot.child("status").getValue().toString().equals("pending")){
                         CurrentState = "he_sent_pending";
-                        btnPerform.setText("Accept friend request");
-                        btnDecline.setText("Decline friend");
+                        btnPerform.setText("Aceptar solicitud de amistad");
+                        btnDecline.setText("Rechazar amigo");
                         btnDecline.setVisibility(View.VISIBLE);
 
                     }
@@ -202,26 +212,27 @@ public class ViewFriendActivity extends AppCompatActivity {
 
             }
         });
-                    if (CurrentState.equals("nothing_happen")){
-                        CurrentState = "nothing_happen";
-                        btnPerform.setText("Send friend request");
+                    if (CurrentState.equals("no_event")){
+                        CurrentState = "no_event";
+                        btnPerform.setText("Enviar solicitud de amistad.");
                         btnDecline.setVisibility(View.GONE);
                     }
     }
 
     private void PerformAction(String userID) {
         //Primer Estado en donde los usuarios no se han enviado ninguna petion el uno al otro
-        if (CurrentState.equals("nothing_happen")){
+        //es decir, aun no son amigos
+        if (CurrentState.equals("no_event")){
             HashMap hashMap = new HashMap();
             hashMap.put("status","pending");
             requestRef.child(mUser.getUid()).child(userID).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(ViewFriendActivity.this, "You have sent friend request", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewFriendActivity.this, "Se ha enviado una petición de amistad", Toast.LENGTH_SHORT).show();
                         btnDecline.setVisibility(View.GONE);
                         CurrentState = "I_sent_pending";
-                        btnPerform.setText("Cancel friend request");
+                        btnPerform.setText("Cancelar solicitud de amistad.");
                     }else {
                         Toast.makeText(ViewFriendActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
                     }
@@ -229,14 +240,15 @@ public class ViewFriendActivity extends AppCompatActivity {
             });
         }
 
+        //Si se ha enviado una petion de amistad el usuario solo podra tener la opcion de cancelar la solicitud
         if (CurrentState.equals("I_sent_pending") || CurrentState.equals("I_sent_decline")){
             requestRef.child(mUser.getUid()).child(userID).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(ViewFriendActivity.this, "You have cancelled friend request", Toast.LENGTH_SHORT).show();
-                        CurrentState="nothing_happen";
-                        btnPerform.setText("Send friend request");
+                        Toast.makeText(ViewFriendActivity.this, "Has cancelado la solicitud de amistad", Toast.LENGTH_SHORT).show();
+                        CurrentState="no_event";//volvemos al estado inicial
+                        btnPerform.setText("Enviar solicitud de amistad.");//Por lo que el usuario puede volver a enviar una peticion de amistad
                         btnDecline.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(ViewFriendActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
@@ -252,8 +264,8 @@ public class ViewFriendActivity extends AppCompatActivity {
                     if (task.isSuccessful()){
                         final HashMap hashMap = new HashMap();
                         hashMap.put("status","friend");
-                        hashMap.put("username",username);//ya se cargan en el metodo LoadUser
-                        hashMap.put("profileImageUrl",profileImageUrl);//ya se cargan en el metodo LoadUser
+                        hashMap.put("username",username);
+                        hashMap.put("profileImageUrl",profileImageUrl);
                         hashMap.put("profession",profession);
 
                         final HashMap hashMap1 = new HashMap();
@@ -270,10 +282,11 @@ public class ViewFriendActivity extends AppCompatActivity {
                                     friendRef.child(userID).child(mUser.getUid()).updateChildren(hashMap1).addOnCompleteListener(new OnCompleteListener() {
                                         @Override
                                         public void onComplete(@NonNull Task task) {
-                                            Toast.makeText(ViewFriendActivity.this, "You added friend", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ViewFriendActivity.this, "Se ha añadido como amigo", Toast.LENGTH_SHORT).show();
                                             CurrentState = "friend";
-                                            btnPerform.setText("Send SMS");
-                                            btnDecline.setText("UnFriend");
+                                            //Al ser amigos se desbloquean las opciones de enviar mensaje y eliminar amigo
+                                            btnPerform.setText("Enviar Mensaje");
+                                            btnDecline.setText("Eliminar amigo");
                                             btnDecline.setVisibility(View.VISIBLE);
                                         }
                                     });
@@ -284,6 +297,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                 }
             });
         }
+        //Si ya se es "amigo" se podra acceder directamente al chat
         if (CurrentState.equals("friend")){
             Intent intent = new Intent(ViewFriendActivity.this,ChatActivity.class);
             intent.putExtra("OtherUserID",userID);
@@ -291,7 +305,7 @@ public class ViewFriendActivity extends AppCompatActivity {
         }
     }
 
-    //Metodo para cargar el usuario seleccionado en la opcion del menu  Find Friends
+    //Metodo para cargar el usuario seleccionado del menu de Usuarios
     private void LoadUser() {
 
         mUserRef.child(userID).addValueEventListener(new ValueEventListener() {
@@ -309,7 +323,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                     address.setText(city+", "+country);
 
                 } else {
-                    Toast.makeText(ViewFriendActivity.this, "Data not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewFriendActivity.this, "No se han encontrado datos", Toast.LENGTH_SHORT).show();
                 }
 
             }

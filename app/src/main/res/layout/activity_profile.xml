@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity">
+    tools:context=".ProfileActivity"
+    android:background="@drawable/lila">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -23,13 +24,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/post">
 
             <View
                 android:id="@+id/view"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -54,7 +56,7 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
 
@@ -101,7 +103,7 @@
                 android:id="@+id/btnUpdate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_btn"
+                android:background="@color/colorPrimary"
                 android:text="Actualizar"
                 android:textAllCaps="false"
                 app:layout_constraintBottom_toBottomOf="parent"

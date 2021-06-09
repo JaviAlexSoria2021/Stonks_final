@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends AppCompatActivity {
 
     /*
-    * En esta activity actualizare los datos del usuario
+     * En esta activity mostrare los datos del usuario
     * */
 
     CircleImageView profileImageView;
@@ -41,7 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        //Si no funciona revisar 23 y probar cambiando las variables 2 por las normales (sin 2)
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         profileImageView=findViewById(R.id.circleImageView);
         inputUsername=findViewById(R.id.inputUsername);
         inputCity=findViewById(R.id.inputCity);
@@ -71,7 +73,7 @@ public class ProfileActivity extends AppCompatActivity {
                     inputProfession.setText(profession);
 
                 } else {
-                    Toast.makeText(ProfileActivity.this, "Data not exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "No existen datos", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -83,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        //Este boton nos llevara a la activity encargada de actualizar los datos
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

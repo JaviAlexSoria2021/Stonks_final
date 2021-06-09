@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.bryansoria.socialappv4.Model.Friends;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -39,6 +40,8 @@ public class ChatUsersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_users);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity"
-    android:background="@drawable/backgroundlogin">
+    android:background="@drawable/lila">
 
     <TextView
         android:id="@+id/logo"
@@ -14,12 +14,13 @@
         android:text="Register"
         android:textColor="@color/colorPrimary"
         android:textSize="36sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"/>
+        app:layout_constraintVertical_bias="0.25"
+        android:fontFamily="@font/ka1"
+        android:textStyle="italic"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputEmail"
@@ -38,8 +39,9 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Email"
             android:inputType="textEmailAddress"
-            android:hint="Email" />
+            android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +62,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -69,9 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_btn"
-        android:text="Register"
+        android:text="Registrarse"
         android:textAllCaps="false"
-        app:backgroundTint="@color/colorGray"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/inputConfirmPassword"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inputConfirmPassword"
@@ -95,7 +98,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirm Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -103,7 +107,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Already have an account?"
+        android:text="Ya tengo una cuenta"
+        android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@+id/btnRegister"
         app:layout_constraintStart_toStartOf="@+id/btnRegister"
         app:layout_constraintTop_toBottomOf="@+id/btnRegister" />

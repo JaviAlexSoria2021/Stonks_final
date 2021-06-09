@@ -12,13 +12,13 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@drawable/aaaaaa"
+        app:itemBackground="@drawable/splasher"
         app:itemIconTint="@color/colorWhite"
         app:itemTextColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/botton_nav_menu"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="548dp" />
+        tools:layout_editor_absoluteY="548dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
-        android:background="@drawable/fondonove">
+        android:background="@drawable/lila"><!--fondonove-->
 
         <TextView
             android:id="@+id/textViewNovedades"

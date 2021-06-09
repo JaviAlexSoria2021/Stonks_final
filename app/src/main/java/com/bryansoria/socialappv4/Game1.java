@@ -3,6 +3,7 @@ package com.bryansoria.socialappv4;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ public class Game1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game1);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         time = (TextView) findViewById(R.id.time);
         click = (TextView) findViewById(R.id.click);

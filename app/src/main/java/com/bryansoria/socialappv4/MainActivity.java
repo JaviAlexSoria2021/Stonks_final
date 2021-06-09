@@ -19,6 +19,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    //Referencias para la base de datos
     FirebaseAuth mAuth;
     FirebaseUser mUser;
     DatabaseReference mUserRef,PostRef,LikeRef,CommentRef;
@@ -84,12 +87,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
 
+        //Oculta la barra de notificaciones
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         toolbar= findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Chat App");
+        getSupportActionBar().setTitle("Posts");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
-        //Variables para añadir Post 13
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);//Menu
+
         addImagePost=findViewById(R.id.addImagePost);
         sendImagePost=findViewById(R.id.send_post_imageView);//Cuando hacemos clic en este boton buscamos los datos en los campos de entrada y los guardamos en el almacen de firebase
         inputPostDesc=findViewById(R.id.inputAddPost);
@@ -108,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FirebaseMessaging.getInstance().subscribeToTopic(mUser.getUid());
 
-
+        //Menu lateral
         drawerLayout= findViewById(R.id.drawerLayout);
         navigationView=findViewById(R.id.navView);
 
@@ -126,6 +132,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 AddPost();
             }
         });
+
+        //Seleccionar imagen de la galeria
         addImagePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,28 +144,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
         LoadPost();
-
-        //Barra de navegacion
     }
 
+    //Este metodo carga la informacion del post
     private void LoadPost() {
         options = new FirebaseRecyclerOptions.Builder<Posts>().setQuery(PostRef,Posts.class).build();
         adapter = new FirebaseRecyclerAdapter<Posts, MyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Posts model) {
-                String postKey= getRef(position).getKey();
+                //Iniciamos al informacion
+                String postKey= getRef(position).getKey();//nos de vuelve el ID de un post especifico
                 holder.postDesc.setText(model.getPostDesc());
                 String timeAgo = calculateTimeAgo(model.getDatePost());
                 holder.timeAgo.setText(timeAgo);
                 holder.username.setText(model.getUsername());
-                Picasso.get().load(model.getPostImageUrl()).into(holder.postImage);
+                Picasso.get().load(model.getPostImageUrl()).into(holder.postImage);//assignamos las imgaenes con Picasso
                 Picasso.get().load(model.getUserProfileImageUrl()).into(holder.profileImage);
                 holder.countLikes(postKey,mUser.getUid(),LikeRef);
                 holder.countComments(postKey,mUser.getUid(),CommentRef);
 
                 holder.likeImage.setOnClickListener(new View.OnClickListener() {
 
-                    //Este metodo controlara los likes del post 17
+                    //Este metodo controlara los likes del post
                     @Override
                     public void onClick(View v) {
                         LikeRef.child(postKey).child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -189,13 +197,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     public void onClick(View v) {
                         String comment = holder.inputComments.getText().toString();
                         if (comment.isEmpty()){
-                            Toast.makeText(MainActivity.this, "Please write something in EditText", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Primero debes escribir un comentario.", Toast.LENGTH_SHORT).show();
                         } else {
                             AddComment(holder,postKey,CommentRef,mUser.getUid(),comment);
                         }
                     }
                 });
                 LoadComment(postKey);
+                //Cargamos la imagen del post para visualizarla
                 holder.postImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -214,11 +223,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 return new MyViewHolder(view);
             }
         };
+        //Asignamos el adaptador
         adapter.startListening();
         recyclerView.setAdapter(adapter);
 
     }
-    //21
+    //Este metodo se escargara de cargar los comentarios de un post
     private void LoadComment(String postKey) {
         MyViewHolder.recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         CommentOption = new FirebaseRecyclerOptions.Builder<Comment>().setQuery(CommentRef.child(postKey),Comment.class).build();
@@ -243,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    //El usuario solo podra añadir un comentario por post, REVISAR 20 para añadir mas (push method before updateChildren())
+    //Metodo que se encargara de añadir un comentario a firebase
     private void AddComment(MyViewHolder holder, String postKey, DatabaseReference commentRef, String uid, String comment) {
         HashMap hashMap = new HashMap();
         hashMap.put("username",usernameV);
@@ -254,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onComplete(@NonNull Task task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(MainActivity.this, "Comments Added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Se ha añadido el comentario", Toast.LENGTH_SHORT).show();
                     adapter.notifyDataSetChanged();
                     holder.inputComments.setText(null);
                 } else {
@@ -291,15 +301,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void AddPost() {
         String postDesc=inputPostDesc.getText().toString();
-        if (postDesc.isEmpty() || postDesc.length()<3){
-            inputPostDesc.setError("Please write something in post description.");
-        }else if (imageUri==null){
-            Toast.makeText(this, "Plase select an image", Toast.LENGTH_SHORT).show();
+        if (postDesc.isEmpty() || postDesc.length()<1){//Comprobamos que se ha añadido una descripcion
+            inputPostDesc.setError("Por favor añade una descripción para el post.");
+        }else if (imageUri==null){ //Comprobamos si se ha seleccionado una imagen para el post
+            Toast.makeText(this, "Por favor seleccione una imagen", Toast.LENGTH_SHORT).show();
         }else{
-            mLoadingBar.setTitle("Adding Post");
+            mLoadingBar.setTitle("Añadiendo Post");
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
 
+            //Objeto para la fecha del post
             Date date = new Date();
             SimpleDateFormat formatter= new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
             String strDate = formatter.format(date);
@@ -320,12 +331,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 hashMap.put("username",usernameV);
                                 PostRef.child(mUser.getUid()+strDate).updateChildren(hashMap).addOnCompleteListener(new OnCompleteListener() {
 
-                                    //Borre metodo onComplete Si algo falla revisar esto VIDEO 13 Y 13A
                                     @Override
                                     public void onComplete(@NonNull Task task) {
                                         if (task.isSuccessful()) {
                                             mLoadingBar.dismiss();
-                                            Toast.makeText(MainActivity.this, "Post Added", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "Post añadido correctamente.", Toast.LENGTH_SHORT).show();
                                             addImagePost.setImageResource(R.drawable.ic_add_post_image);
                                             inputPostDesc.setText("");
                                         } else {
@@ -347,11 +357,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    //Comprobamos si el usuario existe o no.
     @Override
     protected void onStart() {
         super.onStart();
         if (mUser==null){
-            SendUsertoLoginActivity();
+            SendUsertoLoginActivity();//Enviamos al usuario a la pantalla de iniciar sesion
         }else{
             //User Id
             mUserRef.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
@@ -368,7 +379,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(MainActivity.this, "Sorry, something going wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Lo siento, algo salió mal", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -381,21 +392,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //Funciones del menu desplegable del usuario
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId())
         {
             case R.id.home:
-                //AÑADIR enlace para home de JAVI
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 break;
             case R.id.profile:
                 startActivity(new Intent(MainActivity.this,ProfileActivity.class));
                 break;
-            /*case R.id.friend:
-                startActivity(new Intent(MainActivity.this,FriendActivity.class));
-                break;*/
+
             case R.id.listedUsers:
                 startActivity(new Intent(MainActivity.this, ListedUsersActivity.class));
                 break;
@@ -403,9 +410,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.post:
                 startActivity(new Intent(MainActivity.this, MainActivity.class));
                 break;
-            /*case R.id.chat:
-                startActivity(new Intent(MainActivity.this,ChatUsersActivity.class));
-                break;*/
+
             case R.id.logout: //Aqui agregare la funcion de cerrar sesion
                 mAuth.signOut();
                 Intent intent = new Intent(MainActivity.this,LoginActivity.class);
@@ -417,6 +422,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    //Boton para acceder al menu lateral
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId()==android.R.id.home){

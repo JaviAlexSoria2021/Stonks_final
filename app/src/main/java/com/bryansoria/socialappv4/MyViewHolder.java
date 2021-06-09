@@ -40,7 +40,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    //Contador de Likes 18
+    //Contador de Likes
     public void countLikes(String postKey, String uid, DatabaseReference likeRef) {
         likeRef.child(postKey).addValueEventListener(new ValueEventListener() {
             @Override
@@ -58,6 +58,8 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
             }
         });
+
+        //Pintamos el icono del like dependiendo de si existe alguno
         likeRef.child(postKey).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -74,6 +76,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
+    //Contador de comentarios
     public void countComments(String postKey, String uid, DatabaseReference commentRef) {
         commentRef.child(postKey).addValueEventListener(new ValueEventListener() {
             @Override

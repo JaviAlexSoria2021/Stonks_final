@@ -1,4 +1,4 @@
-package com.bryansoria.socialappv4.InterfazGame;
+/*package com.bryansoria.socialappv4.InterfazGame;
 
 
 import android.content.Context;
@@ -47,4 +47,4 @@ public class StorageConfig {
         return listP;
     }
 
-}
+}*/

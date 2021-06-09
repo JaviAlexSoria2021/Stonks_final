@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -52,9 +53,12 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         toolbar=findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Setup Profile");
+        getSupportActionBar().setTitle("Configurar Perfil");
 
 
         profileImageView= findViewById(R.id.profile_image);
@@ -70,6 +74,8 @@ public class SetupActivity extends AppCompatActivity {
         mRef= FirebaseDatabase.getInstance().getReference().child("Users");
         StorageRef= FirebaseStorage.getInstance().getReference().child("ProfileImages");
 
+
+        //Al pulsar encima de la imagen de perfil abrira la galeria de nuestro dispositivo
         profileImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +93,7 @@ public class SetupActivity extends AppCompatActivity {
         });
     }
 
+    //Guardamos la informacion del nuevo usuario
     private void SaveData() {
         String username = inputUsername.getText().toString();
         String city = inputCity.getText().toString();
@@ -94,19 +101,19 @@ public class SetupActivity extends AppCompatActivity {
         String profession = inputProfession.getText().toString();
 
         if (username.isEmpty() || username.length()<3){
-            showError(inputUsername,"Username is not valid!");
+            showError(inputUsername,"Debe tener al menos 3 caracteres");
         }else if (city.isEmpty()|| city.length()<3){
-            showError(inputCity,"City is not valid!");
+            showError(inputCity,"Debe tener al menos 3 caracteres");
         }else if (country.isEmpty()|| country.length()<3){
-            showError(inputCountry,"Country is not valid!");
+            showError(inputCountry,"Debe tener al menos 3 caracteres");
         }else if (profession.isEmpty()|| profession.length()<3){
-            showError(inputProfession,"Profession is not valid!");
+            showError(inputProfession,"Debe tener al menos 3 caracteres");
         }else if (imageUri==null){
-            Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Por favor selecciona una imagen de perfil.", Toast.LENGTH_SHORT).show();
         }
         else{
 
-            mLoadingBar.setTitle("Adding Setup Profile");
+            mLoadingBar.setTitle("Añadiendo los datos.");
             mLoadingBar.setCanceledOnTouchOutside(false);
             mLoadingBar.show();
             StorageRef.child(mUser.getUid()).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
@@ -136,7 +143,7 @@ public class SetupActivity extends AppCompatActivity {
                                         Intent intent = new Intent(SetupActivity.this,MainActivity.class);
                                         startActivity(intent);
                                         mLoadingBar.dismiss();
-                                        Toast.makeText(SetupActivity.this, "Setup Profile Complete", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SetupActivity.this, "Configuracion del perfil completado", Toast.LENGTH_SHORT).show();
                                     }
                                 }).addOnFailureListener(new OnFailureListener() {
                                     @Override
