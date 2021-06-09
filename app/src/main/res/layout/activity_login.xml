@@ -61,7 +61,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Contraseña"
             android:inputType="textPassword"
             android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_btn"
-        android:text="Login"
+        android:text="Iniciar sesión"
         android:textAllCaps="false"
         app:backgroundTint="#6D4F73"
         app:layout_constraintEnd_toEndOf="@+id/inputPassword"
