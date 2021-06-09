@@ -54,7 +54,7 @@ public class ViewFriendActivity extends AppCompatActivity {
 
         userID = getIntent().getStringExtra("userKey");
 
-        Toast.makeText(this, ""+userID, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, ""+userID, Toast.LENGTH_SHORT).show();
 
         mUserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         requestRef = FirebaseDatabase.getInstance().getReference().child("Requests");
