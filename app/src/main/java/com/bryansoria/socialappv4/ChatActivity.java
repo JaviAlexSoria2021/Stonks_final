@@ -169,7 +169,6 @@ public class ChatActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task task) {
                                 if (task.isSuccessful()){
-                                    //sendNotification(sms);
                                     inputSms.setText(null);
                                     Toast.makeText(ChatActivity.this, "Mensaje enviado", Toast.LENGTH_SHORT).show();
                                 }
@@ -192,12 +191,9 @@ public class ChatActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     OtherUsername = snapshot.child("username").getValue().toString();
                     OtherUserProfileImageLink = snapshot.child("profileImage").getValue().toString();
-                    //OtherUserStatus = snapshot.child("status").getValue().toString();
 
                     Picasso.get().load(OtherUserProfileImageLink).into(userProfileImageAppbar);
                     usernameAppbar.setText(OtherUsername);
-                    //status.setText(OtherUserStatus);
-
                 }
             }
 

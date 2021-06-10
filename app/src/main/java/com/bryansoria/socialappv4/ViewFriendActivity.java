@@ -342,7 +342,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     myProfileImageUrl = snapshot.child("profileImage").getValue().toString();
                     myUsername = snapshot.child("username").getValue().toString();
-                    myCity = snapshot.child("city").getValue().toString(); //REVISAR VIDEO 33 LINA DUPLICADA EN SU VIDEO
+                    myCity = snapshot.child("city").getValue().toString();
                     myCountry = snapshot.child("country").getValue().toString();
                     myProfession = snapshot.child("profession").getValue().toString();
 

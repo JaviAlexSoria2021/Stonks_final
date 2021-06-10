@@ -71,7 +71,6 @@ public class FriendActivity extends AppCompatActivity {
                 holder.username.setText(model.getUsername());
                 holder.profession.setText(model.getUsername());
 
-                //Cargamos el usuario para verlo
                 holder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
