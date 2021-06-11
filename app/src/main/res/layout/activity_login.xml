@@ -39,7 +39,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,7 +61,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/contraseña"
             android:inputType="textPassword"
             android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_btn"
-        android:text="Iniciar sesión"
+        android:text="@string/iniciarsesion"
         android:textAllCaps="false"
         app:backgroundTint="#6D4F73"
         app:layout_constraintEnd_toEndOf="@+id/inputPassword"
@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Crear nueva cuenta"
+        android:text="@string/crearnuevacuenta"
         android:textColor="@color/colorWhite"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/btnLogin"

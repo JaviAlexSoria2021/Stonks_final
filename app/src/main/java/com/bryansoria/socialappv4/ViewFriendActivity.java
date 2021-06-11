@@ -103,9 +103,9 @@ public class ViewFriendActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()){
-                                    Toast.makeText(ViewFriendActivity.this, "Se ha eliminado de amigos", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ViewFriendActivity.this, R.string.eliminaramigo, Toast.LENGTH_SHORT).show();
                                     CurrentState = "no_event";
-                                    btnPerform.setText("Enviar solicitud de amistad.");
+                                    btnPerform.setText(R.string.enviarsolicitudamista);
                                     btnDecline.setVisibility(View.GONE);
                                 }
                             }
@@ -123,7 +123,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(ViewFriendActivity.this, "Has rechazado la solicitud de amistad", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewFriendActivity.this, R.string.hasrechazarsolicitud, Toast.LENGTH_SHORT).show();
                         CurrentState="he_sent_decline";
                         btnPerform.setVisibility(View.GONE);
                         btnDecline.setVisibility(View.GONE);
@@ -139,8 +139,8 @@ public class ViewFriendActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     CurrentState="friend";
-                    btnPerform.setText("Enviar Mensaje");
-                    btnDecline.setText("Eliminar amigo");
+                    btnPerform.setText(R.string.enviarmsg);
+                    btnDecline.setText(R.string.eliminar);
                     btnDecline.setVisibility(View.VISIBLE);
                 }
             }
@@ -155,8 +155,8 @@ public class ViewFriendActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     CurrentState="friend";
-                    btnPerform.setText("Enviar Mensaje");
-                    btnDecline.setText("Eliminar amigo");
+                    btnPerform.setText(R.string.enviarmsg);
+                    btnDecline.setText(R.string.eliminar);
                     btnDecline.setVisibility(View.VISIBLE);
                 }
             }
@@ -173,12 +173,12 @@ public class ViewFriendActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     if (snapshot.child("status").getValue().toString().equals("pending")){
                         CurrentState = "I_sent_pending";
-                        btnPerform.setText("Cancelar solicitud de amistad");
+                        btnPerform.setText(R.string.cancelarsolici);
                         btnDecline.setVisibility(View.GONE);
                     }
                     if (snapshot.child("status").getValue().toString().equals("decline")){
                         CurrentState = "I_sent_decline";
-                        btnPerform.setText("Cancelar solicitud de amistad");
+                        btnPerform.setText(R.string.cancelarsolici);
                         btnDecline.setVisibility(View.GONE);
                     }
                 }
@@ -195,8 +195,8 @@ public class ViewFriendActivity extends AppCompatActivity {
                 if (snapshot.exists()){
                     if (snapshot.child("status").getValue().toString().equals("pending")){
                         CurrentState = "he_sent_pending";
-                        btnPerform.setText("Aceptar solicitud de amistad");
-                        btnDecline.setText("Rechazar amigo");
+                        btnPerform.setText(R.string.aceptarsolici);
+                        btnDecline.setText(R.string.rechamigo);
                         btnDecline.setVisibility(View.VISIBLE);
 
                     }
@@ -211,7 +211,7 @@ public class ViewFriendActivity extends AppCompatActivity {
         });
                     if (CurrentState.equals("no_event")){
                         CurrentState = "no_event";
-                        btnPerform.setText("Enviar solicitud de amistad.");
+                        btnPerform.setText(R.string.enviarsolicitudamista);
                         btnDecline.setVisibility(View.GONE);
                     }
     }
@@ -226,10 +226,10 @@ public class ViewFriendActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(ViewFriendActivity.this, "Se ha enviado una petición de amistad", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewFriendActivity.this, R.string.sehaenviaosulicamista, Toast.LENGTH_SHORT).show();
                         btnDecline.setVisibility(View.GONE);
                         CurrentState = "I_sent_pending";
-                        btnPerform.setText("Cancelar solicitud de amistad.");
+                        btnPerform.setText(R.string.cancelarsolici);
                     }else {
                         Toast.makeText(ViewFriendActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
                     }
@@ -243,9 +243,9 @@ public class ViewFriendActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-                        Toast.makeText(ViewFriendActivity.this, "Has cancelado la solicitud de amistad", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewFriendActivity.this, R.string.hasrechazarsolicitud, Toast.LENGTH_SHORT).show();
                         CurrentState="no_event";//volvemos al estado inicial
-                        btnPerform.setText("Enviar solicitud de amistad.");//Por lo que el usuario puede volver a enviar una peticion de amistad
+                        btnPerform.setText(R.string.enviarsolicitudamista);//Por lo que el usuario puede volver a enviar una peticion de amistad
                         btnDecline.setVisibility(View.GONE);
                     } else {
                         Toast.makeText(ViewFriendActivity.this, ""+task.getException().toString(), Toast.LENGTH_SHORT).show();
@@ -279,11 +279,11 @@ public class ViewFriendActivity extends AppCompatActivity {
                                     friendRef.child(userID).child(mUser.getUid()).updateChildren(hashMap1).addOnCompleteListener(new OnCompleteListener() {
                                         @Override
                                         public void onComplete(@NonNull Task task) {
-                                            Toast.makeText(ViewFriendActivity.this, "Se ha añadido como amigo", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(ViewFriendActivity.this, R.string.sehanadioamigo, Toast.LENGTH_SHORT).show();
                                             CurrentState = "friend";
                                             //Al ser amigos se desbloquean las opciones de enviar mensaje y eliminar amigo
-                                            btnPerform.setText("Enviar Mensaje");
-                                            btnDecline.setText("Eliminar amigo");
+                                            btnPerform.setText(R.string.enviarmsg);
+                                            btnDecline.setText(R.string.eliminar);
                                             btnDecline.setVisibility(View.VISIBLE);
                                         }
                                     });
@@ -320,7 +320,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                     address.setText(city+", "+country);
 
                 } else {
-                    Toast.makeText(ViewFriendActivity.this, "No se han encontrado datos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewFriendActivity.this, R.string.nodatos, Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -351,7 +351,7 @@ public class ViewFriendActivity extends AppCompatActivity {
                     address.setText(city+", "+country);
 
                 } else {
-                    Toast.makeText(ViewFriendActivity.this, "Data not found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewFriendActivity.this, R.string.nodatos, Toast.LENGTH_SHORT).show();
                 }
 
             }

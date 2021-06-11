@@ -35,7 +35,7 @@ public class Game1 extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
-    int t=30;
+    int t=10;
     int c=0;
     int score =0;
 
@@ -58,7 +58,7 @@ public class Game1 extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        timer = new CountDownTimer(30000, 1000) {
+        timer = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 t--;
@@ -91,7 +91,7 @@ public class Game1 extends AppCompatActivity {
                 timer.start();
                 btnCookie.setEnabled(true);
                 btnStart.setEnabled(false);
-                t=30;
+                t=10;
                 time.setText("Time : " + t);
                 tvScore.setText("0");
             }

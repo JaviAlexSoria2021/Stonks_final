@@ -25,7 +25,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService{
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(),"CHAT");
         builder.setContentTitle(title);
         builder.setContentText(body);
-        builder.setSmallIcon(R.drawable.logo);
+        builder.setSmallIcon(R.drawable.logo_size);
 
         Intent intent = null;
         if (remoteMessage.getData().get("type").equalsIgnoreCase("sms")){

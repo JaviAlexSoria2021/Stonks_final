@@ -39,7 +39,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -61,7 +61,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:hint="@string/contraseña"
             android:inputType="textPassword"
             android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_btn"
-        android:text="Registrarse"
+        android:text="@string/registrar"
         android:textAllCaps="false"
         app:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="@+id/inputConfirmPassword"
@@ -97,7 +97,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Confirmar contraseña"
+            android:hint="@string/confcontraseña"
             android:inputType="textPassword"
             android:textColor="@color/colorWhite" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Ya tengo una cuenta"
+        android:text="@string/yatengocuenta"
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="@+id/btnRegister"
         app:layout_constraintStart_toStartOf="@+id/btnRegister"

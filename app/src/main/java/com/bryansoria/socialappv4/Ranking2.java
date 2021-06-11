@@ -173,4 +173,5 @@ public class Ranking2 extends AppCompatActivity {
                 });
 
     }
+
 }

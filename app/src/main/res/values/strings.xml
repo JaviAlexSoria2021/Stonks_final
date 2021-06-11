@@ -1,3 +1,39 @@
 <resources>
     <string name="app_name">Stonks</string>
+    <string name="noticias">¡MUY PRONTO!</string>
+    <string name="misjuegos">MIS JUEGOS</string>
+    <string name="email">Email</string>
+    <string name="contraseña">Contraseña</string>
+    <string name="confcontraseña">Confirmar contraseña</string>
+    <string name="iniciarsesion">Iniciar sesión</string>
+    <string name="crearnuevacuenta">Crear nueva cuenta</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="yatengocuenta">Ya tengo una cuenta</string>
+    <string name="biblioteca">Biblioteca</string>
+    <string name="descripost">Descripción del post</string>
+    <string name="user">Usuario</string>
+    <string name="pais">País</string>
+    <string name="ciudad">Ciudad</string>
+    <string name="prof">Profesión</string>
+    <string name="guardar">Guardar</string>
+    <string name="enviarsolicitudamista">Enviar solicitud de amistad</string>
+    <string name="rechazarsolicitud">Rechazar solicitud</string>
+    <string name="perfil">Perfil</string>
+    <string name="cerrarSesion">Cerrar sesión</string>
+    <string name="usuarios">Usuarios</string>
+    <string name="actualizar">Actualizar</string>
+    <string name="listusuarios">Lista de Usuarios"</string>
+    <string name="eliminaramigo">Se ha eliminado de amigos</string>
+    <string name="hasrechazarsolicitud">"Has rechazado la solicitud de amistad"</string>
+    <string name="enviarmsg">Enviar mensaje</string>
+    <string name="eliminar">Eliminar amigo</string>
+    <string name="cancelarsolici">Cancelar solicitud de amistad</string>
+    <string name="aceptarsolici">Aceptar solicitud de amistad</string>
+    <string name="rechamigo">Rechazar amigo</string>
+    <string name="sehaenviaosulicamista">Se ha enviado solicitud de amistad</string>
+    <string name="sehanadioamigo">Se ha añadido como amigo</string>
+    <string name="nodatos">No se han encontrado datos</string>
+    <string name="inicidado">Se ha iniciado sesion correctamente</string>
+    <string name="registrar">Registrarse</string>
+
 </resources>

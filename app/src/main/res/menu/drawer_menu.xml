@@ -9,18 +9,18 @@
 
 
         <item android:id="@+id/profile"
-            android:title="Perfil"
+            android:title="@string/perfil"
             android:icon="@drawable/ic_profile"/>
 
         <item android:id="@+id/listedUsers"
-            android:title="Usuarios"
+            android:title="@string/usuarios"
             android:icon="@drawable/ic_find_friend"/>
 
 
     </group>
     <group android:id="@+id/second">
         <item android:id="@+id/logout"
-            android:title="Cerrar sesión"
+            android:title="@string/cerrarSesion"
             android:icon="@drawable/ic_logout"/>
     </group>
 

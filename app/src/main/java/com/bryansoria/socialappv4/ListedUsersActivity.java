@@ -48,7 +48,8 @@ public class ListedUsersActivity extends AppCompatActivity {
 
         toolbar=findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Lista de Usuarios");
+
+        getSupportActionBar().setTitle(R.string.listusuarios);
 
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

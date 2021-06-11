@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()){
                         mLoadingBar.dismiss();
-                        Toast.makeText(LoginActivity.this, "Se ha iniciado sesion correctamente", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, R.string.inicidado, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);

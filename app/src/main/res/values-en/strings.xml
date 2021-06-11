@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Stonks</string>
+    <string name="noticias">COMING SOON!!</string>
+    <string name="misjuegos">MY GAMES</string>
+    <string name="email">Email</string>
+    <string name="contraseña">Password</string>
+    <string name="confcontraseña">Confirm Password</string>
+    <string name="iniciarsesion">Login</string>
+    <string name="crearnuevacuenta">Create new account</string>
+    <string name="registrarse">Register</string>
+    <string name="yatengocuenta">Already have account</string>
+    <string name="biblioteca">Library</string>
+    <string name="descripost">Post description</string>
+    <string name="user">User</string>
+    <string name="pais">Country</string>
+    <string name="ciudad">City</string>
+    <string name="prof">Profession</string>
+    <string name="guardar">Save</string>
+    <string name="enviarsolicitudamista">Send friend request</string>
+    <string name="rechazarsolicitud">Decline request</string>
+    <string name="perfil">Profile</string>
+    <string name="cerrarSesion">logout</string>
+    <string name="usuarios">Users</string>
+    <string name="actualizar">Update</string>
+    <string name="listusuarios">User List</string>
+    <string name="eliminaramigo">Has been removed from friends</string>
+    <string name="hasrechazarsolicitud">"You have decline friend request"</string>
+    <string name="enviarmsg">Send message</string>
+    <string name="eliminar">Unfriend</string>
+    <string name="cancelarsolici">Cancel friend request</string>
+    <string name="aceptarsolici">Accept friend request</string>
+    <string name="rechamigo">Decline friend</string>
+    <string name="sehaenviaosulicamista">You have sent friend request</string>
+    <string name="sehanadioamigo">You added friend</string>
+    <string name="nodatos">Data not found</string>
+    <string name="inicidado">Login successful</string>
+    <string name="registrar">Register</string>
+
+</resources>
